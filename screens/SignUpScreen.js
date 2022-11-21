@@ -8,7 +8,7 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   ArrowLeftIcon,
   EnvelopeIcon,
@@ -19,28 +19,39 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "@rneui/themed";
 import { KeyboardAvoidingView } from "react-native";
-import { auth } from "../config/firebase";
+import useAuth from "../hooks/useAuth";
 
 const SignUpScreen = () => {
+  const { register, email, setEmail, password, setPassword } = useAuth();
+  const [name, setName] = useState();
+
   const navigation = useNavigation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [name, setName] = useState("");
 
-  const register = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
-        authUser.user.updateProfile({ displayName: name });
-      })
-      .catch((error) => alert(error.message));
-  };
+  // const register = () => {
+  //   if (email !== "" && password !== "") {
+  //     createUserWithEmailAndPassword(auth, email, password)
+  //       .then(
+  //         (authUser) => {
+  //           authUser.user.updateProfile(auth.currentUser, {
+  //             displayName: name,
+  //           });
+  //         }
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerBackTitle: "Back to Login",
-    });
-  }, [navigation]);
+  //         // authUser.user.displayName(name)
+  //         // console.log("Signup success")
+  //       )
+  //       .catch((err) => alert(err.message));
+  //   }
+  // };
+
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerBackTitle: "Back to Login",
+  //   });
+  // }, [navigation]);
 
   return (
     <KeyboardAvoidingView behavior="padding">
@@ -82,6 +93,8 @@ const SignUpScreen = () => {
                   value={email}
                   onChangeText={(text) => setEmail(text)}
                   keyboardType="email-address"
+                  textContentType="emailAddress"
+                  autoFocus={true}
                   className="text-lg py-2 leading-5 w-11/12 border-b border-gray-300"
                 />
               </View>

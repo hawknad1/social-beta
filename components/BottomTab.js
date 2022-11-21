@@ -7,12 +7,17 @@ import {
   EnvelopeIcon,
   UserIcon,
   Cog8ToothIcon,
+  PlusIcon,
+  CurrencyDollarIcon,
 } from "react-native-heroicons/outline";
 import MessageScreen from "../screens/MessageScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import CreatePost from "../screens/CreatePost";
 import AddBottom from "./AddBottom";
 import PopUp from "../components/BottomSheets/PopUp";
+import { TouchableOpacity } from "react-native";
+import EarningScreen from "../screens/EarningScreen";
+import PopUpModal from "./BottomSheets/PopUpModal";
 
 const Tab = createBottomTabNavigator();
 
@@ -35,27 +40,31 @@ const BottomTab = () => {
         name="Message"
         component={MessageScreen}
         options={{
+          tabBarBadge: 12,
           tabBarIcon: ({ color, size }) => (
             <EnvelopeIcon color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="PopUp"
-        component={PopUp}
+        name="add"
+        component={PopUpModal}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <EnvelopeIcon color={color} size={size} />
-          ),
+          tabBarIcon: () => <AddBottom />,
         }}
       />
+
       {/* <Tab.Screen
-        name="CreatePost"
-        component={CreatePost}
+        name="Earnings"
+        component={EarningScreen}
         options={{
-          tabBarButton: () => <AddBottom />,
+          tabBarIcon: ({ color, size }) => (
+            <CurrencyDollarIcon color={color} size={size} />
+          ),
+          headerShown: true,
         }}
       /> */}
+
       <Tab.Screen
         name="Settings and Privacy"
         component={SettingsScreen}

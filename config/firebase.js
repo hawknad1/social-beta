@@ -1,29 +1,18 @@
-// import * as firebase from "firebase";
-// import "firebase/firestore";
-// import "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import Constants from "expo-constants";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDHPaxRvjXRak9c80O2DcbTQEpD-mn5V9c",
-  authDomain: "paysub-f8275.firebaseapp.com",
-  projectId: "paysub-f8275",
-  storageBucket: "paysub-f8275.appspot.com",
-  messagingSenderId: "793019873310",
-  appId: "1:793019873310:web:6cb5fd08594ced7ecf160f",
+  apiKey: Constants.manifest.extra.firebaseApiKey,
+  authDomain: Constants.manifest.extra.firebaseAuthDomain,
+  projectId: Constants.manifest.extra.firebaseProjectId,
+  storageBucket: Constants.manifest.extra.firebaseStorageBucket,
+  messagingSenderId: Constants.manifest.extra.firebaseMessagingSenderId,
+  appId: Constants.manifest.extra.firebaseAppId,
 };
 
-let app;
-
-if (firebase.apps.length === 0) {
-  app = firebase.initializeApp(firebaseConfig);
-} else {
-  app = firebase.app();
-}
-
-const db = app.firestore();
-const auth = firebase.auth();
-
-export { db, auth };
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth();
+export const db = getFirestore();

@@ -6,27 +6,36 @@ import {
   EnvelopeIcon,
 } from "react-native-heroicons/outline";
 import Socials from "../components/Socials";
-
 import "expo-dev-client";
 import { KeyboardAvoidingView } from "react-native";
 import { auth } from "../config/firebase";
 import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import useAuth from "../hooks/useAuth";
 
 const SignInScreen = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        navigation.replace("Home");
-      }
-    });
-    return unsubscribe;
-  }, []);
+  const { login } = useAuth();
 
-  const login = () => {};
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((authUser) => {
+  //     if (authUser) {
+  //       navigation.replace("Home");
+  //     }
+  //   });
+  //   return unsubscribe;
+  // }, []);
+
+  // const login = () => {
+  //   if (email !== "" && password !== "") {
+  //     signInWithEmailAndPassword(auth, email, password)
+  //       .then(() => console.log("login successfull"))
+  //       .catch((err) => alert("Invalid email and password!", err.message));
+  //   }
+  // };
 
   return (
     <KeyboardAvoidingView behavior="padding">
@@ -78,7 +87,10 @@ const SignInScreen = () => {
       </View>
 
       <View className="items-center">
-        <TouchableOpacity className="bg-red-400 w-10/12 rounded-xl mt-8">
+        <TouchableOpacity
+          onPress={login}
+          className="bg-red-400 w-10/12 rounded-xl mt-8"
+        >
           <Text className="text-xl text-center p-4 text-white font-medium">
             Sign In
           </Text>

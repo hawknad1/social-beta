@@ -5,13 +5,10 @@ import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import HomeScreen from "../../screens/HomeScreen";
 import CreateContent from "../Create/CreateContent";
 
-export default function PopUp() {
+const SettingsPopUp = () => {
   const bottomSheetRef = React.useRef(<BottomSheet />, null);
   const snapPoints = useMemo(() => ["30%"], []);
   const [isOpen, setIsOpen] = useState(true);
-
-  // const [isOpen, setIsOpen] = useState(true);
-  // const snapPoints = ["40%"];
 
   return (
     <BottomSheet
@@ -22,8 +19,10 @@ export default function PopUp() {
       onClose={() => setIsOpen(false)}
     >
       <BottomSheetView>
-        <CreateContent />
+        <Text>Settings</Text>
       </BottomSheetView>
     </BottomSheet>
   );
-}
+};
+
+export default SettingsPopUp;

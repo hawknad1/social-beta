@@ -19,10 +19,11 @@ import { CheckBadgeIcon } from "react-native-heroicons/solid";
 import useAuth from "../hooks/useAuth";
 import { auth } from "../config/firebase";
 
-const ProfileScreen = () => {
-  const { name, setName, fullName, data } = useAuth();
+const UserProfileScreen = ({ route, navigation }) => {
+  // const { name, setName, fullName, data } = useAuth();
+  const { name, image, description, subscribers, followers } = route.params;
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   return (
     <ScrollView
@@ -39,28 +40,24 @@ const ProfileScreen = () => {
 
       <View className="items-center bottom-14">
         <View className="border-4 border-white rounded-full">
-          <Image
-            source={require("../images/5.jpg")}
-            className=" h-24 w-24 rounded-full "
-          />
+          <Image source={{ uri: image }} className=" h-24 w-24 rounded-full" />
         </View>
         <View className="flex-row items-center space-x-1">
-          <Text className="font-medium text-base">Dankwah Thomas</Text>
+          <Text className="font-medium text-base">{name.toLowerCase()}</Text>
           <CheckBadgeIcon size={18} className="" />
         </View>
         <Text className="text-base text-center mt-1 w-[360]">
-          Your newest doll here to play dress up and share my fav outfits,
-          fashion and premium content
+          {description}
         </Text>
 
         <View className="flex-row space-x-4 items-center mt-4">
           <View className="items-center p-4">
-            <Text className="font-bold text-lg">1.2k</Text>
+            <Text className="font-bold text-lg">{followers}</Text>
             <Text className="font-medium text-sm text-gray-500">Followers</Text>
           </View>
           <View className="items-center p-4">
             <View className="border-r  border-gray-200" />
-            <Text className="font-bold text-lg">13k</Text>
+            <Text className="font-bold text-lg">{subscribers}</Text>
             <Text className="font-medium text-sm text-gray-500">
               Subscribers
             </Text>
@@ -93,4 +90,4 @@ const ProfileScreen = () => {
   );
 };
 
-export default ProfileScreen;
+export default UserProfileScreen;

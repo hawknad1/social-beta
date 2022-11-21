@@ -15,13 +15,18 @@ import StoryRows from "../components/Stories/StoryRows";
 import Feeds from "../components/Feeds/Feeds";
 import { useNavigation } from "@react-navigation/native";
 import { ExclamationCircleIcon } from "react-native-heroicons/solid";
+import AddBottom from "../components/AddBottom";
+import PopUpModal from "../components/BottomSheets/PopUpModal";
+import useAuth from "../hooks/useAuth";
+import { POSTS } from "../components/data/postData";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const { bottomSheetModalRef, snapPoints, handleModalPopUp } = useAuth();
 
   return (
     <SafeAreaView className="bg-white">
-      <ScrollView showsVerticalScrollIndicator={false} className="">
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="m-4">
           <View className="flex-row justify-between">
             <TouchableOpacity>
@@ -47,9 +52,35 @@ const HomeScreen = () => {
           </View>
         </View>
         <StoryRows />
-        <Feeds image={require("../images/5.jpg")} fullname="Dankwah Thomas" />
-        <Feeds image={require("../images/2.jpg")} fullname="Joan Hans" />
-        <Feeds image={require("../images/1.jpg")} fullname="Megan Good" />
+        {POSTS.map(
+          (
+            {
+              caption,
+              imageUrl,
+              profilePic,
+              user,
+              likes,
+              subscribers,
+              followers,
+              description,
+            },
+            index
+          ) => (
+            <Feeds
+              key={index}
+              caption={caption}
+              imageUrl={imageUrl}
+              profilePic={profilePic}
+              user={user}
+              likes={likes}
+              subscribers={subscribers}
+              followers={followers}
+              description={description}
+            />
+          )
+        )}
+        {/* <Feeds image={require("../images/2.jpg")} fullname="Joan Hans" />
+        <Feeds image={require("../images/1.jpg")} fullname="Megan Good" /> */}
       </ScrollView>
     </SafeAreaView>
   );

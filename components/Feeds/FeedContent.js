@@ -7,27 +7,35 @@ import {
   CurrencyDollarIcon,
   ShareIcon,
 } from "react-native-heroicons/outline";
+// import { POSTS } from "../data/postData";
 
-const FeedContent = ({ image, caption, comments, likes, share }) => {
+// { image, caption, comments, likes, share }
+
+const FeedContent = ({ caption, imageUrl, likes, share }) => {
   return (
     <View className="m-2">
       <Text className="text-base ml-4 font-normal mb-2">{caption}</Text>
       <TouchableOpacity>
-        <Image source={image} className=" w-[395px] h-[300px] rounded-lg" />
+        <Image
+          source={{ uri: imageUrl }}
+          className=" w-[395px] h-[300px] rounded-lg"
+        />
       </TouchableOpacity>
       <View className="flex-row justify-between">
-        <View className="flex-row space-x-4 mt-3">
-          <TouchableOpacity className="flex-row items-center space-x-1">
-            <HeartIcon color="gray" size={20} />
-            <Text>{likes}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity className="flex-row items-center space-x-1">
+        <View className="flex-row items-center space-x-4 mt-3 ml-2">
+          <View className="flex-row items-center space-x-3">
+            <TouchableOpacity className="">
+              <HeartIcon color="gray" size={25} />
+            </TouchableOpacity>
+            <Text className="font-medium text-sm text-gray-500">{likes}</Text>
+          </View>
+
+          <TouchableOpacity>
             <ChatBubbleLeftEllipsisIcon color="gray" size={20} />
-            <Text>{comments}</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-row items-center space-x-1">
+
+          <TouchableOpacity>
             <ShareIcon color="gray" size={20} />
-            <Text>{share}</Text>
           </TouchableOpacity>
         </View>
         <View className="items-center mt-3">

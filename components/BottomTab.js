@@ -18,6 +18,7 @@ import PopUp from "../components/BottomSheets/PopUp";
 import { TouchableOpacity } from "react-native";
 import EarningScreen from "../screens/EarningScreen";
 import PopUpModal from "./BottomSheets/PopUpModal";
+import UserProfileScreen from "../screens/UserProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -47,14 +48,25 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
+        name="Earnings1"
+        component={EarningScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <CurrencyDollarIcon color={color} size={size} />
+          ),
+          headerShown: true,
+        }}
+      />
+
+      <Tab.Screen
         name="add"
-        component={PopUpModal}
+        component={AddBottom}
         options={{
           tabBarIcon: () => <AddBottom />,
         }}
       />
 
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Earnings"
         component={EarningScreen}
         options={{
@@ -63,7 +75,7 @@ const BottomTab = () => {
           ),
           headerShown: true,
         }}
-      /> */}
+      />
 
       <Tab.Screen
         name="Settings and Privacy"

@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signOut,
   updateCurrentUser,
   updateProfile,
@@ -9,6 +10,7 @@ import React, { createContext, useContext, useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { auth } from "../config/firebase";
+import { POSTS } from "../components/data/postData";
 
 export const AuthContext = createContext({});
 
@@ -38,15 +40,6 @@ export const AuthProvider = ({ children }) => {
   function handleModalPopUp() {
     bottomSheetModalRef.current?.present();
   }
-
-  // const [name, setName] = useState({
-  //   fullName: auth.currentUser.updateProfile(auth.currentUser,{})
-  // });
-  // const [data, setData] = useState({
-  //   name: auth.currentUser?.displayName,
-  // });
-
-  // const { name } = data;
 
   const logout = () => {
     signOut(auth).catch((err) => setError(err));

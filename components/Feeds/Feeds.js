@@ -1,48 +1,20 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
-import Stories from "../Stories/Stories";
 import FeedProfile from "./FeedProfile";
 import FeedContent from "./FeedContent";
 import { Divider } from "@rneui/themed";
+import FeedComments from "./FeedComments";
+import Caption from "./Caption";
 
-// { fullname, image }
-const Feeds = ({
-  caption,
-  imageUrl,
-  profilePic,
-  user,
-  share,
-  likes,
-  subscribers,
-  followers,
-  description,
-}) => {
+const Feeds = ({ post }) => {
   return (
     <View className="">
-      <Divider width={0.2} />
-      {/* fullname={fullname} image={image} */}
+      {/* <Divider width={0.2} /> */}
 
-      <FeedProfile
-        profilePic={profilePic}
-        user={user}
-        subscribers={subscribers}
-        followers={followers}
-        description={description}
-      />
-      <FeedContent
-        caption={caption}
-        imageUrl={imageUrl}
-        share={share}
-        likes={likes}
-      />
-
-      {/* <FeedContent
-        image={require("../../images/2.jpg")}
-        caption="Hello,I am having fun!"
-        likes="42.1k"
-        comments={521}
-        share={36}
-      /> */}
+      <FeedProfile post={post} />
+      <FeedContent post={post} />
+      <Caption post={post} />
+      <FeedComments post={post} />
     </View>
   );
 };

@@ -7,18 +7,14 @@ import {
   CurrencyDollarIcon,
   ShareIcon,
 } from "react-native-heroicons/outline";
-// import { POSTS } from "../data/postData";
 
-// { image, caption, comments, likes, share }
-
-const FeedContent = ({ caption, imageUrl, likes, share }) => {
+const FeedContent = ({ post }) => {
   return (
     <View className="m-2">
-      <Text className="text-base ml-4 font-normal mb-2">{caption}</Text>
       <TouchableOpacity>
         <Image
-          source={{ uri: imageUrl }}
-          className=" w-[395px] h-[300px] rounded-lg"
+          source={{ uri: post.imageUrl }}
+          className=" w-[395px] h-[420px] rounded-2xl"
         />
       </TouchableOpacity>
       <View className="flex-row justify-between">
@@ -27,15 +23,17 @@ const FeedContent = ({ caption, imageUrl, likes, share }) => {
             <TouchableOpacity className="">
               <HeartIcon color="gray" size={25} />
             </TouchableOpacity>
-            <Text className="font-medium text-sm text-gray-500">{likes}</Text>
+            <Text className="font-medium text-sm text-gray-500">
+              {post.likes} likes
+            </Text>
           </View>
 
           <TouchableOpacity>
-            <ChatBubbleLeftEllipsisIcon color="gray" size={20} />
+            <ChatBubbleLeftEllipsisIcon color="gray" size={25} />
           </TouchableOpacity>
 
           <TouchableOpacity>
-            <ShareIcon color="gray" size={20} />
+            <PaperAirplaneIcon color="gray" size={25} />
           </TouchableOpacity>
         </View>
         <View className="items-center mt-3">
@@ -46,7 +44,7 @@ const FeedContent = ({ caption, imageUrl, likes, share }) => {
         </View>
       </View>
 
-      <View className="border-b mt-4 border-gray-200" />
+      {/* <View className="border-b mt-4 border-gray-200" /> */}
     </View>
   );
 };
